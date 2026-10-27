@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<title>Happy Diwali in Advance ✨</title>
+<style>
+  :root{
+    --gold:#ffd166; --deep:#1a0b2e; --cream:#fff3d6;
+    --pink:#ff5d8f; --orange:#ff9a3c; --green:#06d6a0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif}
+
+  body{
+    background:radial-gradient(circle at 50% 0%,#3d1650 0%,var(--deep) 55%,#0b0518 100%);
+    color:var(--cream);
+  }
+
+  /* ---------- Confetti ---------- */
+  #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
+
+  /* ---------- Floating cats ---------- */
+  .cat{
+    position:fixed;font-size:36px;z-index:190;cursor:pointer;user-select:none;
+    filter:drop-shadow(0 6px 12px rgba(0,0,0,.45));
+    animation:float var(--d,7s) ease-in-out infinite alternate;
+    transition:transform .25s;
+  }
+  .cat:hover{transform:scale(1.4) rotate(-8deg)}
+  @keyframes float{
+    from{transform:translateY(0) rotate(var(--r,-6deg))}
+    to{transform:translateY(-30px) rotate(calc(var(--r,-6deg)*-1))}
+  }
+
+  /* ---------- Slides ---------- */
+  .slides{
+    width:100%;height:100%;position:relative;
+    display:flex;transition:transform .55s cubic-bezier(.77,0,.18,1);
+  }
+  .slide{
+    width:100vw;height:100vh;flex-shrink:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:70px 24px 100px;position:relative;z-index:10;
+    text-align:center;overflow:hidden;
+  }
+
+  /* ---------- Nav dots ---------- */
+  .dots{
+    position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+    display:flex;gap:10px;z-index:210;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:50%;
+    background:rgba(255,209,102,.3);border:1px solid rgba(255,209,102,.4);
+    cursor:pointer;transition:.3s;padding:0;
+  }
+  .dot.active{background:var(--gold);transform:scale(1.35);box-shadow:0 0 12px var(--gold)}
+
+  /* ---------- Arrows ---------- */
+  .arrow{
+    position:fixed;top:50%;transform:translateY(-50%);z-index:210;
+    width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,209,102,.3);
+    background:rgba(11,5,24,.5);color:var(--gold);font-size:22px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:.3s;padding:0;
+  }
+  .arrow:hover{background:rgba(255,209,102,.15);border-color:var(--gold)}
+  .arrow.l{left:10px} .arrow.r{right:10px}
+
+  /* ---------- Slide 1: Hero ---------- */
+  .slide-1 h1{
+    font-size:clamp(40px,10vw,84px);font-weight:900;line-height:1;
+    background:linear-gradient(90deg,#ff9a3c,var(--gold),#ffe9a8,var(--gold),#ff9a3c);
+    background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 5s linear infinite;
+  }
+  @keyframes shine{to{background-position:300% 0}}
+  .slide-1 .sub{margin:18px auto 0;max-width:480px;font-size:17px;opacity:.82;line-height:1.6}
+  .diyas{display:flex;gap:22px;margin:24px 0;position:relative}
+  .diya{font-size:48px;animation:bob 2s ease-in-out infinite}
+  .diya:nth-child(2){animation-delay:.35s} .diya:nth-child(3){animation-delay:.7s}
+  .diya::after{
+    content:"";position:absolute;left:50%;top:-16px;width:15px;height:24px;
+    transform:translateX(-50%);
+    background:radial-gradient(circle at 50% 80%,#fff6c9 0%,#ffb703 40%,#fb5607 100%);
+    border-radius:50% 50% 18% 18%;filter:blur(.5px);
+    animation:flicker .15s ease-in-out infinite alternate;
+  }
+  @keyframes flicker{
+    from{transform:translateX(-50%) scale(1) skewX(-5deg);opacity:.8}
+    to{transform:translateX(-50%) scale(1.2) skewX(5deg);opacity:1}
+  }
+  @keyframes bob{50%{transform:translateY(-8px)}}
+
+  /* ---------- Slide 2: Countdown ---------- */
+  .slide-2 h2{font-size:clamp(26px,5vw,44px);margin-bottom:28px;font-weight:700}
+  .cd{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .cd .u{
+    min-width:80px;padding:18px 10px;border-radius:18px;
+    background:rgba(255,209,102,.07);border:1px solid rgba(255,209,102,.2);
+  }
+  .cd .u b{display:block;font-size:36px;color:var(--gold);font-variant-numeric:tabular-nums}
+  .cd .u span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+  .slide-2 .msg{margin-top:28px;font-size:15px;opacity:.7;max-width:420px;line-height:1.6}
+
+  /* ---------- Slide 3: Sweets ---------- */
+  .slide-3 h2{font-size:clamp(28px,6vw,48px);margin-bottom:24px;font-weight:700}
+  .sq{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;width:100%;max-width:680px}
+  .sq .s{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,209,102,.15);
+    border-radius:20px;padding:22px 14px;transition:.3s;cursor:default;
+  }
+  .sq .s:hover{transform:translateY(-6px) rotate(-1deg);border-color:var(--gold);box-shadow:0 14px 36px rgba(0,0,0,.4)}
+  .sq .s .e{font-size:48px;display:block;margin-bottom:8px;animation:bob 3s ease-in-out infinite}
+  .sq .s h3{color:var(--gold);font-size:16px;margin-bottom:6px}
+  .sq .s p{font-size:13px;opacity:.7;line-height:1.5}
+
+  /* ---------- Slide 4: Wishes ---------- */
+  .slide-4 h2{font-size:clamp(28px,6vw,48px);margin-bottom:24px;font-weight:700}
+  .wc{
+    background:linear-gradient(145deg,rgba(255,209,102,.09),rgba(255,93,143,.06));
+    border:1px solid rgba(255,209,102,.18);border-radius:22px;
+    padding:26px 22px;margin:0 auto 16px;max-width:560px;position:relative;
+  }
+  .wc::after{content:"🪔";position:absolute;right:14px;top:10px;font-size:26px;opacity:.3}
+  .wc q{display:block;font-size:17px;line-height:1.6;font-style:italic;margin-bottom:10px}
+  .wc small{color:var(--gold);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .wc .cp{margin-top:6px;padding:6px 16px;font-size:12px;border-radius:99px;border:1px solid rgba(255,209,102,.3);background:rgba(255,209,102,.08);color:var(--gold);cursor:pointer}
+
+  /* ---------- Slide 5: Rangoli + Diyas ---------- */
+  .slide-5 h2{font-size:clamp(28px,6vw,48px);margin-bottom:22px;font-weight:700}
+  .rangoli{
+    width:min(280px,70vw);aspect-ratio:1;position:relative;margin:0 auto 28px;
+    animation:spin 24s linear infinite;
+  }
+  .rangoli div{
+    position:absolute;inset:0;display:flex;justify-content:center;font-size:30px;
+    transform-origin:50% 50%;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .lr{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+  .lr .lmp{font-size:40px;filter:grayscale(1) brightness(.45);cursor:pointer;transition:.35s}
+  .lr .lmp.on{filter:none;transform:scale(1.15);text-shadow:0 0 24px #ffb703,0 0 48px #fb5607}
+  .slide-5 .ft{font-size:14px;opacity:.6;max-width:400px;line-height:1.6}
+
+  /* ---------- Button ---------- */
+  .btn{
+    font:inherit;font-weight:700;cursor:pointer;padding:14px 32px;border-radius:99px;border:none;
+    background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;
+    box-shadow:0 10px 28px rgba(255,93,143,.35);transition:.25s;margin-top:10px;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.03)}
+  .btn:active{transform:scale(.97)}
+
+  /* ---------- Slide-in animations ---------- */
+  .slide *{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+  .slide.active *:nth-child(1){transition-delay:.1s;opacity:1;transform:none}
+  .slide.active *:nth-child(2){transition-delay:.2s;opacity:1;transform:none}
+  .slide.active *:nth-child(3){transition-delay:.35s;opacity:1;transform:none}
+  .slide.active *:nth-child(4){transition-delay:.5s;opacity:1;transform:none}
+  .slide.active *:nth-child(5){transition-delay:.65s;opacity:1;transform:none}
+  .slide.active *:nth-child(6){transition-delay:.8s;opacity:1;transform:none}
+  .slide.active *:nth-child(7){transition-delay:.95s;opacity:1;transform:none}
+  .slide.active *:nth-child(8){transition-delay:1.1s;opacity:1;transform:none}
+  .slide.active *:nth-child(9){transition-delay:1.25s;opacity:1;transform:none}
+  .slide.active *:nth-child(10){transition-delay:1.4s;opacity:1;transform:none}
+
+  /* ---------- Page indicator ---------- */
+  .page-ind{
+    position:fixed;top:16px;right:16px;z-index:210;
+    font-size:13px;opacity:.5;letter-spacing:.08em;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- NAV ARROWS -->
+<button class="arrow l" onclick="go(-1)">‹</button>
+<button class="arrow r" onclick="go(1)">›</button>
+
+<!-- DOTS -->
+<div class="dots" id="dots"></div>
+
+<!-- PAGE INDICATOR -->
+<div class="page-ind" id="pg">1 / 5</div>
+
+<!-- SLIDES -->
+<div class="slides" id="sl">
+
+  <!-- ========== SLIDE 1: HERO ========== -->
+  <div class="slide active slide-1">
+    <h1>Happy Diwali!</h1>
+    <p class="sub">May your homes glow with diyas, your days with sweetness, and your heart with joy — long before the fireworks begin. ✨</p>
+    <div class="diyas"><div class="diya">🪔</div><div class="diya">🪔</div><div class="diya">🪔</div></div>
+    <button class="btn" onclick="burst()">Celebrate! 🎉</button>
+  </div>
+
+  <!-- ========== SLIDE 2: COUNTDOWN ========== -->
+  <div class="slide slide-2">
+    <h2>⏳ Countdown to Diwali</h2>
+    <div class="cd">
+      <div class="u"><b id="d">--</b><span>Days</span></div>
+      <div class="u"><b id="h">--</b><span>Hours</span></div>
+      <div class="u"><b id="m">--</b><span>Mins</span></div>
+      <div class="u"><b id="s">--</b><span>Secs</span></div>
+    </div>
+    <p class="msg">Every second brings us closer to the Festival of Lights — but the wishes can start now! 💛</p>
+  </div>
+
+  <!-- ========== SLIDE 3: SWEETS ========== -->
+  <div class="slide slide-3">
+    <h2>🍬 The Sweet Table</h2>
+    <div class="sq">
+      <div class="s"><span class="e">🟡</span><h3>Ladoo</h3><p>Boondi pearls bound by ghee &amp; optimism</p></div>
+      <div class="s"><span class="e">🟤</span><h3>Barfi</h3><p>Milky squares with silver dreams</p></div>
+      <div class="s"><span class="e">🟠</span><h3>Gulab Jamun</h3><p>Fried dumplings in rose-cardamom syrup</p></div>
+      <div class="s"><span class="e">🔶</span><h3>Jalebi</h3><p>Crispy spirals in hot sugar bliss</p></div>
+      <div class="s"><span class="e">🥥</span><h3>Nankhatai</h3><p>Crumbly chai-biscuit hugs</p></div>
+      <div class="s"><span class="e">🌸</span><h3>Rose Malai</h3><p>Paneer discs in saffron cream</p></div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 4: WISHES ========== -->
+  <div class="slide slide-4">
+    <h2>💌 Wish Wall</h2>
+    <div class="wc">
+      <q>Wishing you a Diwali as bright as the diyas on your doorstep and as sweet as every mithai on your plate.</q>
+      <small>— For someone special</small>
+      <button class="cp" onclick="copyWish(this)">📋 Copy</button>
+    </div>
+    <div class="wc">
+      <q>May Lakshmi ji bless your home with prosperity and may your life be filled with light, love, and laughter.</q>
+      <small>— Traditional greeting</small>
+      <button class="cp" onclick="copyWish(this)">📋 Copy</button>
+    </div>
+    <div class="wc">
+      <q>Happy Diwali! May this festival of lights remind you that even the smallest spark can light up the darkest night. ✨</q>
+      <small>— Modern &amp; heartfelt</small>
+      <button class="cp" onclick="copyWish(this)">📋 Copy</button>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 5: RANGOLI + DIYAS ========== -->
+  <div class="slide slide-5">
+    <h2>🎨 Rangoli &amp; Diyas</h2>
+    <div class="rangoli" id="rangoli"></div>
+    <p class="ft">Tap the diyas to light them up! ✨</p>
+    <div class="lr" id="lampRow"></div>
+    <button class="btn" onclick="burst()">Light Up! 🪔</button>
+  </div>
+
+</div>
+
+<script>
+/* ========== SLIDE NAVIGATION ========== */
+const sl=document.getElementById('sl'),dots=document.getElementById('dots'),pg=document.getElementById('pg');
+let cur=0,tot=5,drag=false,sx=0;
+const slides=sl.children;
+
+// build dots
+for(let i=0;i<tot;i++){
+  const d=document.createElement('button');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>jump(i);
+  dots.appendChild(d);
+}
+
+function jump(n){
+  cur=Math.max(0,Math.min(n,tot-1));
+  sl.style.transform=`translateX(${-cur*100}vw)`;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+  pg.textContent=`${cur+1} / ${tot}`;
+  for(let i=0;i<tot;i++) slides[i].classList.toggle('active',i===cur);
+}
+function go(dir){jump(cur+dir)}
+
+// touch / mouse drag
+document.addEventListener('touchstart',e=>{drag=true;sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(!drag)return;drag=false;
+  const dx=e.changedTouches[0].clientX-sx;
+  if(dx<-60)go(1);if(dx>60)go(-1);
+});
+document.addEventListener('mousedown',e=>{drag=true;sx=e.clientX});
+document.addEventListener('mouseup',e=>{
+  if(!drag)return;drag=false;
+  const dx=e.clientX-sx;
+  if(dx<-60)go(1);if(dx>60)go(-1);
+});
+
+// keyboard
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1)});
+
+/* ========== CONFETTI ========== */
+const cv=document.getElementById('confetti'),cx=cv.getContext('2d');
+let W,H;
+const resize=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};
+resize();addEventListener('resize',resize);
+const COLS=['#ffd166','#ff5d8f','#06d6a0','#ef476f','#ffb703','#8338ec','#3a86ff'];
+let bits=[];
+
+function spawn(cx,cy,n=80,sp=1){
+  for(let i=0;i<n;i++){
+    const a=Math.random()*Math.PI*2,s=(Math.random()*9+3)*sp;
+    bits.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-4,
+      w:Math.random()*9+4,h:Math.random()*5+3,
+      rot:Math.random()*Math.PI,vr:(Math.random()-.5)*.3,
+      col:COLS[Math.floor(Math.random()*COLS.length)],
+      shape:Math.random()<.3?'circle':'rect',life:1});
+  }
+}
+
+setInterval(()=>{if(bits.length<200)spawn(Math.random()*W,-12,5,.35)},500);
+
+function loop(){
+  cx.clearRect(0,0,W,H);
+  for(let i=bits.length-1;i>=0;i--){
+    const p=bits[i];p.vy+=.18;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life-=.004;
+    cx.save();cx.globalAlpha=Math.max(p.life,0);cx.translate(p.x,p.y);cx.rotate(p.rot);cx.fillStyle=p.col;
+    if(p.shape==='circle'){cx.beginPath();cx.arc(0,0,p.w/2,0,Math.PI*2);cx.fill()}
+    else cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+    cx.restore();
+    if(p.y>H+40||p.life<=0)bits.splice(i,1);
+  }
+  requestAnimationFrame(loop);
+}
+loop();
+
+function burst(){spawn(W/2,H/2,160,1.5)}
+document.addEventListener('click',e=>spawn(e.clientX,e.clientY,55));
+
+/* ========== FLOATING CATS ========== */
+const CATS=['🐱','😺','😸','🐈','🐈‍⬛','😻','🙀','😽','🐾','😹'];
+for(let i=0;i<8;i++){
+  const c=document.createElement('div');c.className='cat';
+  c.textContent=CATS[i%CATS.length];
+  c.style.left=(5+Math.random()*88)+'vw';c.style.top=(6+Math.random()*80)+'vh';
+  c.style.setProperty('--d',(5+Math.random()*5).toFixed(1)+'s');
+  c.style.setProperty('--r',(Math.random()*24-12).toFixed(0)+'deg');
+  c.style.animationDelay=(-Math.random()*5).toFixed(1)+'s';
+  c.addEventListener('click',ev=>{
+    ev.stopPropagation();
+    const r=c.getBoundingClientRect();
+    spawn(r.left+r.width/2,r.top+r.height/2,40,.8);
+    c.animate([{transform:'scale(1)'},{transform:'scale(1.7) rotate(20deg)'},{transform:'scale(1)'}],{duration:400,easing:'ease-out'});
+  });
+  document.body.appendChild(c);
+}
+
+/* ========== COUNTDOWN (Slide 2) ========== */
+const DW=['2026-11-08T18:00:00+05:30','2027-10-29T18:00:00+05:30','2028-11-17T18:00:00+05:30'];
+const tgt=DW.map(d=>new Date(d)).find(d=>d>new Date())||new Date(DW.at(-1));
+const $d=document.getElementById('d'),$h=document.getElementById('h'),$m=document.getElementById('m'),$s=document.getElementById('s');
+setInterval(()=>{
+  let sec=Math.max(0,((tgt-new Date())/1000)|0);
+  $d.textContent=String(sec/86400|0).padStart(2,'0');
+  $h.textContent=String((sec/3600|0)%24).padStart(2,'0');
+  $m.textContent=String((sec/60|0)%60).padStart(2,'0');
+  $s.textContent=String(sec%60).padStart(2,'0');
+},1000);
+
+/* ========== COPY WISH (Slide 4) ========== */
+function copyWish(btn){
+  const q=btn.parentElement.querySelector('q').textContent;
+  navigator.clipboard?.writeText(q).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',1500)});
+}
+
+/* ========== RANGOLI (Slide 5) ========== */
+const R=['🌸','✿','❀','🌺','💮','🪷','🌼','💐'];
+const rg=document.getElementById('rangoli');
+R.forEach((s,i)=>{
+  const d=document.createElement('div');
+  d.textContent=s;
+  d.style.transform=`rotate(${i*36}deg) translateY(-45%)`;
+  rg.appendChild(d);
+});
+
+/* ========== LAMPS (Slide 5) ========== */
+const lamps=['🪔','🪔','🪔','🪔','🪔'];
+const lr=document.getElementById('lampRow');
+lamps.forEach(l=>{
+  const b=document.createElement('button');b.className='lmp';b.textContent=l;
+  b.addEventListener('click',()=>b.classList.toggle('on'));
+  lr.appendChild(b);
+});
+</script>
+</body>
+</html>
